@@ -23,9 +23,20 @@ Everything supports Thai text.
    If the image is missing, the site shows a colored letter placeholder — nothing breaks.
 3. Add the `id` to a tier in `data/tiers.js`.
 
+### Use your own pictures for stat icons / pets
+
+Drop a picture with the right name — no config editing needed, the site finds it automatically:
+
+- Stat / set / dedicated-option icon: `images/icons/<stat-id>.png` (or `.webp`)
+  — stat ids: `crit`, `critdmg`, `speed`, `critres`, `def`, `hp`, `atk`, `acc`, `eva`
+- Pet: `images/pets/<pet-id>.png` (or `.webp`), e.g. `images/pets/fairy.png`
+- Character portrait: `images/characters/<char-id>.webp`
+
+Delete the picture and the built-in icon comes back.
+
 ### Add a GvG build
 
-Copy one block in `data/gvg.js` and change it. Structure per member:
+There is a ready template comment at the top of `data/gvg.js` — copy it, remove the `//`, and fill it in. Structure per member:
 
 ```js
 {

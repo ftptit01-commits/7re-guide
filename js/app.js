@@ -311,6 +311,42 @@
     fixPortraits();
   }
 
+  // ---------- custom icon pictures ----------
+  // Drop a file at images/icons/<stat-id>.png (or .webp) to replace a
+  // stat/set icon; images/pets/<pet-id>.png (or .webp) for pets.
+  // Found images are applied and the page re-renders once.
+  function probeCustomImages() {
+    var jobs = [];
+    function add(cfg, base, id) {
+      if (!cfg || cfg.image) return;
+      jobs.push({ cfg: cfg, urls: [base + id + ".png", base + id + ".webp"] });
+    }
+    Object.keys(C.stats).forEach(function (id) { add(C.stats[id], "images/icons/", id); });
+    Object.keys(C.sets).forEach(function (id) { add(C.sets[id], "images/icons/", C.sets[id].svg || id); });
+    Object.keys(C.pets).forEach(function (id) { add(C.pets[id], "images/pets/", id); });
+
+    var pending = jobs.length, found = false;
+    if (!pending) return;
+    jobs.forEach(function (job) {
+      function tryUrl(i) {
+        if (i >= job.urls.length) {
+          if (--pending === 0 && found) render();
+          return;
+        }
+        var im = new Image();
+        im.onload = function () {
+          job.cfg.image = job.urls[i];
+          found = true;
+          if (--pending === 0) render();
+        };
+        im.onerror = function () { tryUrl(i + 1); };
+        im.src = job.urls[i];
+      }
+      tryUrl(0);
+    });
+  }
+
   window.addEventListener("hashchange", render);
   render();
+  probeCustomImages();
 })();

@@ -14,7 +14,40 @@
 //     dedicated  dedicated option / ออปชั่นเฉพาะ: { stat, value }
 //   pets        pet ids from config.js pets
 //   notes       หมายเหตุ — free text, Thai OK
+//
+// CUSTOM ICON PICTURES / ใส่รูปไอคอนเอง:
+//   Put a picture at  images/icons/<stat-id>.png  (or .webp) and the
+//   site uses it automatically for that stat / set / dedicated option.
+//   วางรูปที่ images/icons/ ตั้งชื่อตาม id เช่น crit.png, speed.png
+//   Pets: images/pets/<pet-id>.png  เช่น images/pets/fairy.png
+//   stat ids: crit, critdmg, speed, critres, def, hp, atk, acc, eva
 // ============================================================
+//
+// ─── TEMPLATE — copy this block to add a new team ───────────
+// คัดลอกบล็อกนี้ไปวางใน DATA_GVG ด้านล่าง แล้วลบ // ออก
+//
+//  {
+//    tier: "S",                        // S+ | S | A+ | A | B | C
+//    boots: "-",                       // ความเร็วรองเท้า ("-" = ไม่กำหนด)
+//    skillOrder: ["1", "2", "3"],      // ลำดับสกิล
+//    members: [
+//      {
+//        charId: "kyle",               // id จาก data/characters.js
+//        position: "B",                // "F" = หน้า, "B" = หลัง
+//        set: "crit",                  // crit | critdmg | atk | def | hp | speed | lifesteal | counter | critres | evasion
+//        stats: [                      // สเตตัสเป้าหมาย (สูงสุด 3 แถว)
+//          { stat: "crit",    value: "100" },
+//          { stat: "speed",   value: "32" },
+//          { stat: "critres", value: "ลดคริ" }
+//        ],
+//        dedicated: { stat: "def", value: "เยอะๆ" }   // ออปชั่นเฉพาะ
+//      }
+//      // เพิ่มสมาชิกได้ 1-5 ตัว (คั่นด้วย , )
+//    ],
+//    pets: ["fairy"],                  // id จาก config.js pets
+//    notes: "หมายเหตุ...\n→ ขึ้นบรรทัดใหม่ด้วย \\n"
+//  },
+// ─────────────────────────────────────────────────────────────
 window.DATA_GVG = [
   {
     tier: "A+",
